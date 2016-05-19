@@ -182,7 +182,7 @@ app.delete('/users/login', middleware.requireAuthentication, function(req, res) 
 	req.token.destroy().then(function() {
 		res.status(204).send();
 	}).catch(function() {
-		res.status(500).send();
+		res.status(401).send();
 	});
 });
 
