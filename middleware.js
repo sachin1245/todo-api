@@ -11,16 +11,16 @@ module.exports = function(db) {
 				where: {
 					tokenHash: cryptojs.MD5(token).toString()
 				}
-			}).then(function(tokenInstance){
+			}).then(function (tokenInstance){
 				if(!tokenInstance){
 					throw new Error();
 				}
 
 				req.token = tokenInstance;
 
-				db.user.findByToken(token);
+				return db.user.findByToken(token);
 
-			}).then(function(){
+			}).then(function (user){
 				req.user = user;
 				next();
 			}).catch(function(){
